@@ -15,6 +15,9 @@ class AuthenticateController extends Controller
 
     }
 
+    /*This authenticates the user by
+    *generating the token
+    */
     public function authenticate (Request $request){
       $credentials  = $request->only('email','password');
       try{
@@ -28,5 +31,10 @@ class AuthenticateController extends Controller
       }
 
       return response()->json(compact('token'));
+    }
+
+    public function logout(Request $request)
+    {
+        return JWTAuth::invalidate(JWTAuth::getToken());
     }
 }

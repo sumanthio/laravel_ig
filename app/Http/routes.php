@@ -16,8 +16,6 @@ Route::get('/', function () {
 });
 
 
-Route::resource('api/auth', 'AuthenticateController', ['only' => ['welcome']]);
-Route::post('api/auth', 'AuthenticateController@authenticate');
 
 
 /*
@@ -33,4 +31,11 @@ Route::post('api/auth', 'AuthenticateController@authenticate');
 
 Route::group(['middleware' => ['web']], function () {
     //
+});
+
+Route::group(['middleware' => ['cors'],'prefix' =>'api'], function () {
+    //
+    Route::resource('/auth', 'AuthenticateController', ['only' => ['welcome']]);
+    Route::post('/auth', 'AuthenticateController@authenticate');
+
 });
